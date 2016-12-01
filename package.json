@@ -1,0 +1,8 @@
+{
+  "name": "xin-map",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:reekoheek/xin-map.git",
+  "author": "Ganesha <reekoheek@gmail.com>",
+  "license": "MIT"
+}
