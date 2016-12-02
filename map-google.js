@@ -111,6 +111,7 @@ class MapGoogle extends xin.Component {
 
       return new Promise(resolve => {
         let script = document.createElement('script');
+        script.id = id;
         script.src = `https://maps.googleapis.com/maps/api/js?key=${this.apiKey}&libraries=places`;
         script.onload = resolve;
         document.body.appendChild(script);
@@ -118,6 +119,10 @@ class MapGoogle extends xin.Component {
     })('mapapi');
 
     this.set('map', new window.google.maps.Map(this.$.map, this._getMapOptions()));
+
+    this.async(() => {
+      google.maps.event.trigger(this.map, 'resize');
+    }, 50);
 
     this.fire('google-map-ready');
 
