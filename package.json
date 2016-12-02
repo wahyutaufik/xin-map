@@ -4,5 +4,15 @@
   "main": "index.js",
   "repository": "git@github.com:reekoheek/xin-map.git",
   "author": "Ganesha <reekoheek@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.11.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1"
+  },
+  "dependencies": {
+    "xin": "xinix-technology/xin#next",
+    "xin-ionic": "reekoheek/xin-ionic#next"
+  }
 }

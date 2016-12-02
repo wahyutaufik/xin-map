@@ -4,6 +4,8 @@ import html from './templates/map-google-input-selectview.html';
 
 import './css/map-google-input-selectview.css';
 
+import 'xin-ionic/ion-label';
+import 'xin-ionic/ion-button';
 import 'xin-ionic/ion-input';
 
 import './map-google';

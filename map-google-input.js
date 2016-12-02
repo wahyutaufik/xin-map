@@ -6,7 +6,7 @@ class MapGoogleInput extends xin.Component {
   get template () {
     return '' +
     `
-      <div class="text">[[valueText]]</div>
+      <p class="text">[[valueText]]</p>
       <div class="cover" (click)="_coverClicked(evt)"></div>
     `;
   }
