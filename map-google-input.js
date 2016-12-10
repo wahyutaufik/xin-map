@@ -41,19 +41,11 @@ class MapGoogleInput extends xin.Component {
       // let referer = this.__app.getFragment();
 
       this.__app.once('navigated', evt => {
-        let view = document.getElementsByTagName('map-google-input-selectview')[0];
+        let view = document.querySelector('map-google-input-selectview');
         view.set('callback', (result) => {
-          let geocoder = new window.google.maps.Geocoder();
-          geocoder.geocode({
-            location: {lat: result.latitude, lng: result.longitude},
-          }, (results, status) => {
-            if (status === window.google.maps.GeocoderStatus.OK) {
-              this.set('value', result);
-              this.set('valueText', results[0].formatted_address);
-              // this.__app.navigate(referer);
-              this.fire('change');
-            }
-          });
+          this.set('value', result);
+          this.set('valueText', result.address);
+          this.fire('change');
         });
       });
 
