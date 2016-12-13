@@ -25,7 +25,12 @@ class MapGoogleInput extends xin.Component {
 
       selectViewUri: {
         type: String,
-        value: '/map-google-input-selectview',
+        value: '/map',
+      },
+
+      selectViewComponent: {
+        type: String,
+        value: 'map-google-view',
       },
     };
   }
@@ -38,10 +43,14 @@ class MapGoogleInput extends xin.Component {
 
   async present () {
     return await new Promise((resolve, reject) => {
+      // Select Location
       // let referer = this.__app.getFragment();
 
       this.__app.once('navigated', evt => {
-        let view = document.querySelector('map-google-input-selectview');
+        let view = document.querySelector(`${this.selectViewComponent}`);
+        if (!view) {
+          throw new Error('Select view not found');
+        }
         view.set('callback', (result) => {
           this.set('value', result);
           this.set('valueText', result.address);

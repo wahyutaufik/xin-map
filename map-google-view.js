@@ -1,8 +1,8 @@
 import xin from 'xin';
 import View from 'xin/components/view';
-import html from './templates/map-google-input-selectview.html';
+import html from './templates/map-google-view.html';
 
-import './css/map-google-input-selectview.css';
+import './css/map-google-view.css';
 
 import 'xin-ionic/ion-toolbar';
 import 'xin-ionic/ion-label';
@@ -14,13 +14,18 @@ import 'xin-ionic/ion-content';
 import './map-google';
 import './map-google-marker';
 
-class MapGoogleInputSelectview extends View {
+class MapGoogleView extends View {
   get template () {
     return html;
   }
 
   get props () {
     return Object.assign({}, super.props, {
+      label: {
+        type: String,
+        value: '',
+      },
+
       latitude: {
         type: Number,
         observer: '_locationChanged(latitude, longitude)',
@@ -54,10 +59,21 @@ class MapGoogleInputSelectview extends View {
   attached () {
     super.attached();
 
-    window.navigator.geolocation.getCurrentPosition(position => {
-      this.set('latitude', position.coords.latitude);
-      this.set('longitude', position.coords.longitude);
+    navigator.geolocation.getCurrentPosition(position => {
+      if (!this.latitude && !this.longitude) {
+        this.set('latitude', position.coords.latitude);
+        this.set('longitude', position.coords.longitude);
+      }
     });
+  }
+
+  focusing (parameters) {
+    super.focusing(parameters);
+
+    if (parameters.latitude && parameters.longitude) {
+      this.set('latitude', Number(parameters.latitude));
+      this.set('longitude', Number(parameters.longitude));
+    }
   }
 
   _chooseClicked (evt) {
@@ -90,35 +106,35 @@ class MapGoogleInputSelectview extends View {
 
     this.debounce('_locationChanged', () => {
       let geocoder = new window.google.maps.Geocoder();
-      geocoder.geocode({
-        location: {lat: this.latitude, lng: this.longitude},
-      }, (results, status) => {
-        if (status === window.google.maps.GeocoderStatus.OK) {
-          let val = {
-            latitude: this.latitude,
-            longitude: this.longitude,
-            googleFormattedAddress: results[0].formatted_address,
-            address: results[0].formatted_address,
-            components: {},
-          }
-
-          results[0].address_components.forEach(component => {
-            if (component.types[0] === 'political') {
-              return;
-            }
-            val.components[component.types[0]] = component.long_name;
-          });
-
-          this.set('value', val);
-          this.set('search', val.address);
-
-          this.isSet = true;
+      geocoder.geocode({ location: { lat: this.latitude, lng: this.longitude } }, (results, status) => {
+        if (status !== window.google.maps.GeocoderStatus.OK) {
+          return;
         }
+
+        let val = {
+          latitude: this.latitude,
+          longitude: this.longitude,
+          googleFormattedAddress: results[0].formatted_address,
+          address: results[0].formatted_address,
+          components: {},
+        };
+
+        results[0].address_components.forEach(component => {
+          if (component.types[0] === 'political') {
+            return;
+          }
+          val.components[component.types[0]] = component.long_name;
+        });
+
+        this.set('value', val);
+        this.set('search', val.address);
+
+        this.isSet = true;
       });
     });
   }
 }
 
-xin.define('map-google-input-selectview', MapGoogleInputSelectview);
+xin.define('map-google-view', MapGoogleView);
 
-export default MapGoogleInputSelectview;
+export default MapGoogleView;

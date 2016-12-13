@@ -1,7 +1,32 @@
 import xin from 'xin';
-// import checkCordovaAsync from '../../lib/check-cordova';
+
+let mapInquiries = [];
 
 class MapGoogle extends xin.Component {
+  static async waitForGoogleMap (apiKey) {
+    if (window.google && window.google.maps) {
+      return window.google.maps;
+    }
+
+    if (mapInquiries.length > 0) {
+      return await new Promise((resolve, reject) => {
+        mapInquiries.push([resolve, reject]);
+      });
+    }
+
+    return await new Promise((resolve, reject) => {
+      mapInquiries.push([resolve, reject]);
+
+      let script = document.createElement('script');
+      script.id = 'gmap-api';
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
+      script.onload = () => {
+        mapInquiries.forEach(inquiry => inquiry[0](window.google.maps));
+      };
+      document.body.appendChild(script);
+    });
+  }
+
   get props () {
     return Object.assign({}, super.props, {
       latitude: {
@@ -72,11 +97,10 @@ class MapGoogle extends xin.Component {
   }
 
   get template () {
-    return '' +
-    `
+    return String(`
       <slot></slot>
       <div id="map" style="height: 100%"></div>
-    `;
+    `);
   }
 
   created () {
@@ -104,19 +128,7 @@ class MapGoogle extends xin.Component {
       return;
     }
 
-    await (id => {
-      if (document.getElementById(id)) {
-        return Promise.resolve();
-      }
-
-      return new Promise(resolve => {
-        let script = document.createElement('script');
-        script.id = id;
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${this.apiKey}&libraries=places`;
-        script.onload = resolve;
-        document.body.appendChild(script);
-      });
-    })('mapapi');
+    await MapGoogle.waitForGoogleMap(this.apiKey);
 
     this.set('map', new window.google.maps.Map(this.$.map, this._getMapOptions()));
 
