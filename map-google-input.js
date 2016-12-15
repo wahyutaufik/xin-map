@@ -4,11 +4,10 @@ import './css/map-google-input.css';
 
 class MapGoogleInput extends xin.Component {
   get template () {
-    return '' +
-    `
+    return String(`
       <p class="text">[[valueText]]</p>
       <div class="cover" (click)="_coverClicked(evt)"></div>
-    `;
+    `);
   }
 
   get props () {
@@ -20,7 +19,7 @@ class MapGoogleInput extends xin.Component {
 
       valueText: {
         type: String,
-        value: '',
+        computed: '_computeValueText(value)',
       },
 
       selectViewUri: {
@@ -53,13 +52,20 @@ class MapGoogleInput extends xin.Component {
         }
         view.set('callback', (result) => {
           this.set('value', result);
-          this.set('valueText', result.address);
           this.fire('change');
         });
       });
 
       this.__app.navigate(this.selectViewUri);
     });
+  }
+
+  _computeValueText (value) {
+    if (!value || !value.address) {
+      return '';
+    }
+
+    return value.address;
   }
 }
 
