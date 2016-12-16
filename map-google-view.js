@@ -21,9 +21,9 @@ class MapGoogleView extends View {
 
   get props () {
     return Object.assign({}, super.props, {
-      label: {
+      title: {
         type: String,
-        value: '',
+        value: 'Choose Map',
       },
 
       latitude: {
@@ -60,10 +60,12 @@ class MapGoogleView extends View {
     super.attached();
 
     navigator.geolocation.getCurrentPosition(position => {
-      if (!this.latitude && !this.longitude) {
-        this.set('latitude', position.coords.latitude);
-        this.set('longitude', position.coords.longitude);
+      if (this.latitude || this.longitude) {
+        return;
       }
+
+      this.set('latitude', position.coords.latitude);
+      this.set('longitude', position.coords.longitude);
     });
   }
 

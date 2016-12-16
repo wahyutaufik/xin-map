@@ -184,18 +184,17 @@ class MapGoogle extends xin.Component {
           imgX = imgX === '-18' ? '0' : '-18';
           currentLocationImg.style.backgroundPosition = imgX + 'px 0px';
         }, 500);
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(position => {
-            var latlng = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-            // marker.setPosition(latlng);
-            this.map.setCenter(latlng);
-            clearInterval(animationInterval);
-            currentLocationImg.style.backgroundPosition = '-144px 0px';
-          });
-        } else {
+
+        navigator.geolocation.getCurrentPosition(position => {
+          var latlng = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          // marker.setPosition(latlng);
+          this.map.setCenter(latlng);
+          clearInterval(animationInterval);
+          currentLocationImg.style.backgroundPosition = '-144px 0px';
+        }, err => {
           clearInterval(animationInterval);
           currentLocationImg.style.backgroundPosition = '0px 0px';
-        }
+        });
       });
 
       controlDiv.index = 1;
