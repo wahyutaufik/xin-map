@@ -36,6 +36,10 @@ class MapGoogleMarker extends xin.Component {
         type: String,
       },
 
+      icon: {
+        type: String,
+      },
+
       mouseEvents: {
         type: Boolean,
         observer: '_mouseEventsChanged',
@@ -49,11 +53,13 @@ class MapGoogleMarker extends xin.Component {
   }
 
   _mapChanged (map) {
+    console.log(map);
     this.set('marker', new window.google.maps.Marker({
       position: { lat: Number(this.latitude), lng: Number(this.longitude) },
       map: map,
       title: this.title,
       label: this.label,
+      icon: this.icon,
     }));
 
     this._mouseEventsChanged();
