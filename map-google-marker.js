@@ -36,6 +36,10 @@ class MapGoogleMarker extends xin.Component {
         type: String,
       },
 
+      icon: {
+        type: String,
+      },
+
       mouseEvents: {
         type: Boolean,
         observer: '_mouseEventsChanged',
@@ -54,6 +58,7 @@ class MapGoogleMarker extends xin.Component {
       map: map,
       title: this.title,
       label: this.label,
+      icon: this.icon,
     }));
 
     this._mouseEventsChanged();
