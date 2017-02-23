@@ -1,12 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <button is="ion-button" backbutton slot="left">
-      <ion-icon name="arrow-back"></ion-icon>
+      <ion-icon name="arrow-back-outline" role="img" class="icon-ios ion-ios-arrow-back-outline item-icon" aria-label="arrow-back-outline"></ion-icon>
     </button>
     <ion-title slot="title">[[title]]</ion-title>
   </ion-toolbar>
   <ion-item>
-    <ion-input id="search" type="text" value="{{search}}"></ion-input>
+    <ion-input id="search" type="search" value="{{search}}"></ion-input>
+    <!-- <ion-searchbar id="search" type="search" placeholder="Search" value="{{search}}"></ion-searchbar> -->
   </ion-item>
 </ion-header>
 
