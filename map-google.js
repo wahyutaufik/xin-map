@@ -265,6 +265,10 @@ class MapGoogle extends xin.Component {
       styles: this.styles,
       maxZoom: Number(this.maxZoom),
       minZoom: Number(this.minZoom),
+      zoomControl: true,
+      zoomControlOptions: {
+          position: google.maps.ControlPosition.LEFT_BOTTOM
+      },
     };
 
     // Only override the default if set.

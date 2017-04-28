@@ -13,3 +13,15 @@
   width:20px;
   cursor:pointer;
 }
+
+map-google-view .searchbar-md {
+  padding: 0;
+}
+
+map-google-view .item-inner {
+  padding: 0!important;
+}
+
+map-google-view .searchbar-input{
+  border-radius: 0!important;
+}
