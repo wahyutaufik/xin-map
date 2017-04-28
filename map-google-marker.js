@@ -64,6 +64,12 @@ class MapGoogleMarker extends xin.Component {
     this._mouseEventsChanged();
   }
 
+  __templateUninitialize () {
+    super.__templateUninitialize();
+
+    console.log('uninit');
+  }
+
   _clearListener (name) {
     if (this._listeners[name]) {
       this.marker.removeListener(this._listeners[name]);

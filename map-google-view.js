@@ -8,6 +8,7 @@ import 'xin-ionic/ion-toolbar';
 import 'xin-ionic/ion-label';
 import 'xin-ionic/ion-button';
 import 'xin-ionic/ion-input';
+import 'xin-ionic/ion-searchbar';
 import 'xin-ionic/ion-icon';
 import 'xin-ionic/ion-content';
 
@@ -56,25 +57,21 @@ class MapGoogleView extends View {
     });
   }
 
-  attached () {
-    super.attached();
-
-    navigator.geolocation.getCurrentPosition(position => {
-      if (this.latitude || this.longitude) {
-        return;
-      }
-
-      this.set('latitude', position.coords.latitude);
-      this.set('longitude', position.coords.longitude);
-    });
-  }
-
   focusing (parameters) {
     super.focusing(parameters);
 
     if (parameters.latitude && parameters.longitude) {
       this.set('latitude', Number(parameters.latitude));
       this.set('longitude', Number(parameters.longitude));
+    } else {
+      navigator.geolocation.getCurrentPosition(position => {
+        // if (this.latitude || this.longitude) {
+        //   return;
+        // }
+
+        this.set('latitude', position.coords.latitude);
+        this.set('longitude', position.coords.longitude);
+      });
     }
   }
 
