@@ -106,7 +106,6 @@ class MapGoogle extends xin.Component {
   created () {
     super.created();
     this._listeners = [];
-
     this.markers = [];
   }
 
