@@ -7,6 +7,7 @@
   </ion-toolbar>
   <ion-item>
     <ion-input id="search" type="search" value="{{search}}"></ion-input>
+    <ion-icon name="close" (click)="_clearValueClicked(evt)"></ion-icon>
     <!-- <ion-searchbar id="search" type="search" placeholder="Search" value="{{search}}"></ion-searchbar> -->
   </ion-item>
 </ion-header>
@@ -31,5 +32,5 @@
 </ion-content>
 
 <ion-footer>
-  <button is="ion-button" (click)="_chooseClicked(evt)" full large>Choose</button>
+  <button is="ion-button" (click)="_chooseClicked(evt)" full large>[[button]]</button>
 </ion-footer>

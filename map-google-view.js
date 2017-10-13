@@ -27,6 +27,11 @@ class MapGoogleView extends View {
         value: 'Choose Map',
       },
 
+      button: {
+        type: String,
+        value: 'Choose',
+      },
+
       latitude: {
         type: Number,
         observer: '_locationChanged(latitude, longitude)',
@@ -94,6 +99,10 @@ class MapGoogleView extends View {
         this.$.map.map.setCenter(places[0].geometry.location);
       }
     });
+  }
+
+  _clearValueClicked (evt) {
+    this.set('search', '');
   }
 
   _locationChanged (latitude, longitude) {
