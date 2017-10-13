@@ -1,8 +1,8 @@
-import xin from 'xin';
+import { Component, define} from '@xinix/xin';
 
 let mapInquiries = [];
 
-class MapGoogle extends xin.Component {
+class MapGoogle extends Component {
   static async waitForGoogleMap (apiKey) {
     if (window.google && window.google.maps) {
       return window.google.maps;
@@ -298,6 +298,6 @@ class MapGoogle extends xin.Component {
   }
 }
 
-xin.define('map-google', MapGoogle);
+define('map-google', MapGoogle);
 
 export default MapGoogle;
