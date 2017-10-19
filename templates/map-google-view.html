@@ -1,37 +1,34 @@
-<ion-header>
-  <ion-toolbar>
-    <button is="ion-button" backbutton slot="left">
-      <ion-icon name="arrow-back-outline" role="img" class="icon-ios ion-ios-arrow-back-outline item-icon" aria-label="arrow-back-outline"></ion-icon>
-    </button>
-    <ion-title slot="title">[[title]]</ion-title>
-  </ion-toolbar>
-  <ion-item>
-    <ion-input id="search" type="search" value="{{search}}"></ion-input>
-    <ion-icon name="close" (click)="_clearValueClicked(evt)"></ion-icon>
-    <!-- <ion-searchbar id="search" type="search" placeholder="Search" value="{{search}}"></ion-searchbar> -->
-  </ion-item>
-</ion-header>
+<header class="ui-header">
+  <div class="ui-header__row">
+    <a (click)="__global.history.back()" class="button text back">Back</a>
+    <span class="ui-header__title">[[title]]</span>
+  </div>
+  <!-- <span class="detail">{{search}}</span> -->
+  <ui-textfield id="search" type="search" value="{{search}}"></ui-textfield>
+  <!-- <input id="search" type="search"> -->
+</header>
+<div class="ui-layout ui-layout--v">
+  <div class="ui-padding">
+    <map-google
+      id="map"
+      class="flex"
+      style="height: 100%"
+      zoom="18"
+      map="{{map}}"
+      mark-center
+      latitude="{{latitude}}"
+      longitude="{{longitude}}"
+      current-location
+      disable-fullscreen-control
+      disable-map-type-control
+      disable-street-view-control
+      api-key="[[apiKey]]"
+      (google-map-ready)="_mapReady(evt)"
+      >
+    </map-google>
+  </div>
+  <button class="choose ui-button ui-button--block ui-button--colored" (click)="_chooseClicked(evt)">[[button]]</button>
+</div>
 
-<ion-content class="layout">
-  <map-google
-    id="map"
-    class="flex"
-    style="height: 100%"
-    zoom="18"
-    map="{{map}}"
-    mark-center
-    latitude="{{latitude}}"
-    longitude="{{longitude}}"
-    current-location
-    disable-fullscreen-control
-    disable-map-type-control
-    disable-street-view-control
-    api-key="[[apiKey]]"
-    (google-map-ready)="_mapReady(evt)"
-    >
-  </map-google>
-</ion-content>
-
-<ion-footer>
-  <button is="ion-button" (click)="_chooseClicked(evt)" full large>[[button]]</button>
-</ion-footer>
+<!-- <ion-footer> -->
+<!-- </ion-footer> -->

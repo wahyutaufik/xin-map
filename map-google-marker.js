@@ -1,6 +1,6 @@
-import xin from 'xin';
+import { Component, define} from '@xinix/xin';
 
-class MapGoogleMarker extends xin.Component {
+class MapGoogleMarker extends Component {
   get props () {
     return Object.assign({}, super.props, {
       latitude: {
@@ -124,6 +124,6 @@ class MapGoogleMarker extends xin.Component {
   }
 }
 
-xin.define('map-google-marker', MapGoogleMarker);
+define('map-google-marker', MapGoogleMarker);
 
 export default MapGoogleMarker;

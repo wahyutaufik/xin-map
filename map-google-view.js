@@ -1,19 +1,11 @@
-import xin from 'xin';
-import View from 'xin/components/view';
+import { define} from '@xinix/xin';
+import { View } from '@xinix/xin/views';
 import html from './templates/map-google-view.html';
-
-import './css/map-google-view.css';
-
-import 'xin-ionic/ion-toolbar';
-import 'xin-ionic/ion-label';
-import 'xin-ionic/ion-button';
-import 'xin-ionic/ion-input';
-import 'xin-ionic/ion-searchbar';
-import 'xin-ionic/ion-icon';
-import 'xin-ionic/ion-content';
 
 import './map-google';
 import './map-google-marker';
+import './css/map-google-view.css';
+import 'xin-ui/ui-textfield';
 
 class MapGoogleView extends View {
   get template () {
@@ -143,6 +135,6 @@ class MapGoogleView extends View {
   }
 }
 
-xin.define('map-google-view', MapGoogleView);
+define('map-google-view', MapGoogleView);
 
 export default MapGoogleView;

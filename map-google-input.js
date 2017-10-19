@@ -1,12 +1,13 @@
-import xin from 'xin';
+import { Component, define} from '@xinix/xin';
 
 import './css/map-google-input.css';
 
-class MapGoogleInput extends xin.Component {
+class MapGoogleInput extends Component {
   get template () {
     return String(`
-      <p class="text">[[valueText]]</p>
-      <div class="cover" (click)="_coverClicked(evt)"></div>
+      <div class="cover" (click)="_coverClicked(evt)">
+        <p class="text">[[valueText]]</p>
+      </div>
     `);
   }
 
@@ -69,6 +70,6 @@ class MapGoogleInput extends xin.Component {
   }
 }
 
-xin.define('map-google-input', MapGoogleInput);
+define('map-google-input', MapGoogleInput);
 
 export default MapGoogleInput;
